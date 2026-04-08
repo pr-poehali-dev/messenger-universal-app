@@ -3,6 +3,7 @@ import { Section, Contact, CONTACTS } from "@/components/chat/types";
 
 interface MiddlePanelProps {
   activeSection: Section;
+  setActiveSection: (s: Section) => void;
   activeChat: number | null;
   setActiveChat: (id: number) => void;
   setSidebarOpen: (v: boolean) => void;
@@ -19,6 +20,7 @@ interface MiddlePanelProps {
 
 export default function MiddlePanel({
   activeSection,
+  setActiveSection,
   activeChat,
   setActiveChat,
   setSidebarOpen,
@@ -58,9 +60,9 @@ export default function MiddlePanel({
         )}
       </div>
 
-      {(activeSection === "chats" || activeSection === "contacts" || activeSection === "search") && (
-        <div className="px-3 py-2.5 border-b border-tg-border">
-          <div className="flex items-center gap-2 bg-tg-input rounded-xl px-3 py-2">
+      {(activeSection === "chats" || activeSection === "contacts" || activeSection === "groups" || activeSection === "search") && (
+        <div className="px-3 pt-2.5 pb-0 border-b border-tg-border">
+          <div className="flex items-center gap-2 bg-tg-input rounded-xl px-3 py-2 mb-2.5">
             <Icon name="Search" size={14} className="text-tg-muted flex-shrink-0" />
             <input
               type="text"
@@ -74,6 +76,24 @@ export default function MiddlePanel({
                 <Icon name="X" size={13} className="text-tg-muted hover:text-tg-text" />
               </button>
             )}
+          </div>
+          <div className="flex">
+            {(["chats", "contacts", "groups"] as Section[]).map((tab) => {
+              const labels: Record<string, string> = { chats: "Чаты", contacts: "Контакты", groups: "Группы" };
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setActiveSection(tab)}
+                  className={`flex-1 py-2 text-[12.5px] font-medium transition-colors border-b-2 ${
+                    activeSection === tab
+                      ? "text-tg-accent border-tg-accent"
+                      : "text-tg-muted border-transparent hover:text-tg-text"
+                  }`}
+                >
+                  {labels[tab]}
+                </button>
+              );
+            })}
           </div>
         </div>
       )}

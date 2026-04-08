@@ -48,6 +48,7 @@ export default function Index() {
       />
       <MiddlePanel
         activeSection={activeSection}
+        setActiveSection={setActiveSection}
         activeChat={activeChat}
         setActiveChat={setActiveChat}
         setSidebarOpen={setSidebarOpen}
