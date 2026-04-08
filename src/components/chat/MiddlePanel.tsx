@@ -37,12 +37,21 @@ export default function MiddlePanel({
   return (
     <div className="flex flex-col w-full lg:w-80 xl:w-96 border-r border-tg-border bg-tg-panel flex-shrink-0">
       <div className="flex items-center gap-3 px-4 py-4 border-b border-tg-border">
-        <button
-          className="lg:hidden p-1.5 rounded-lg text-tg-muted hover:text-tg-text hover:bg-tg-hover transition-colors"
-          onClick={() => setSidebarOpen(true)}
-        >
-          <Icon name="Menu" size={18} />
-        </button>
+        {(activeSection === "security" || activeSection === "profile") ? (
+          <button
+            className="p-1.5 rounded-lg text-tg-muted hover:text-tg-text hover:bg-tg-hover transition-colors"
+            onClick={() => setActiveSection(activeSection === "security" ? "profile" : "chats")}
+          >
+            <Icon name="ArrowLeft" size={18} />
+          </button>
+        ) : (
+          <button
+            className="lg:hidden p-1.5 rounded-lg text-tg-muted hover:text-tg-text hover:bg-tg-hover transition-colors"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <Icon name="Menu" size={18} />
+          </button>
+        )}
         <div className="flex-1">
           <h1 className="text-tg-text font-semibold text-[15px]">
             {activeSection === "chats" && "Сообщения"}
