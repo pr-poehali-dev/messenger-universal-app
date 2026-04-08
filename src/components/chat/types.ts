@@ -1,4 +1,4 @@
-export type Section = "chats" | "contacts" | "profile" | "search" | "groups" | "security";
+export type Section = "chats" | "contacts" | "profile" | "search" | "groups" | "security" | "calls";
 
 export interface Contact {
   id: number;

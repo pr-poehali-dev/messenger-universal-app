@@ -58,6 +58,7 @@ export default function MiddlePanel({
             {activeSection === "contacts" && "Контакты"}
             {activeSection === "groups" && "Группы"}
             {activeSection === "search" && "Поиск"}
+            {activeSection === "calls" && "Звонки"}
             {activeSection === "security" && "Безопасность"}
             {activeSection === "profile" && "Профиль"}
           </h1>
@@ -69,7 +70,7 @@ export default function MiddlePanel({
         )}
       </div>
 
-      {(activeSection === "chats" || activeSection === "contacts" || activeSection === "groups" || activeSection === "search") && (
+      {(activeSection === "chats" || activeSection === "contacts" || activeSection === "groups" || activeSection === "calls" || activeSection === "search") && (
         <div className="px-3 pt-2.5 pb-0 border-b border-tg-border">
           <div className="flex items-center gap-2 bg-tg-input rounded-xl px-3 py-2 mb-2.5">
             <Icon name="Search" size={14} className="text-tg-muted flex-shrink-0" />
@@ -87,8 +88,8 @@ export default function MiddlePanel({
             )}
           </div>
           <div className="flex">
-            {(["chats", "contacts", "groups"] as Section[]).map((tab) => {
-              const labels: Record<string, string> = { chats: "Чаты", contacts: "Контакты", groups: "Группы" };
+            {(["chats", "contacts", "groups", "calls"] as Section[]).map((tab) => {
+              const labels: Record<string, string> = { chats: "Чаты", contacts: "Контакты", groups: "Группы", calls: "Звонки" };
               return (
                 <button
                   key={tab}
@@ -244,6 +245,46 @@ export default function MiddlePanel({
                 )}
               </div>
             )}
+          </div>
+        )}
+
+        {/* CALLS */}
+        {activeSection === "calls" && (
+          <div>
+            {[
+              { id: 1, name: "Анна Соколова", avatar: "АС", color: "#5B9CF6", type: "incoming", duration: "5:23", time: "сегодня, 14:10" },
+              { id: 2, name: "Михаил Петров", avatar: "МП", color: "#F59E0B", type: "outgoing", duration: "2:47", time: "сегодня, 11:32" },
+              { id: 3, name: "Дмитрий Ларин", avatar: "ДЛ", color: "#F87171", type: "missed", duration: "", time: "вчера, 18:05" },
+              { id: 4, name: "Елена Фёдорова", avatar: "ЕФ", color: "#6EE7B7", type: "incoming", duration: "12:01", time: "вчера, 15:44" },
+              { id: 5, name: "Анна Соколова", avatar: "АС", color: "#5B9CF6", type: "outgoing", duration: "0:58", time: "пн, 09:20" },
+              { id: 6, name: "Михаил Петров", avatar: "МП", color: "#F59E0B", type: "missed", duration: "", time: "пн, 08:15" },
+            ].map((call) => (
+              <div key={call.id} className="flex items-center gap-3 px-4 py-3 border-b border-tg-border/40 hover:bg-tg-hover transition-colors">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-white text-[12px] font-semibold flex-shrink-0" style={{ backgroundColor: call.color }}>
+                  {call.avatar}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="text-tg-text text-[13.5px] font-medium">{call.name}</div>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <Icon
+                      name={call.type === "incoming" ? "PhoneIncoming" : call.type === "outgoing" ? "PhoneOutgoing" : "PhoneMissed"}
+                      size={12}
+                      className={call.type === "missed" ? "text-red-400" : "text-tg-accent"}
+                    />
+                    <span className={`text-[11px] ${call.type === "missed" ? "text-red-400" : "text-tg-muted"}`}>
+                      {call.type === "incoming" ? "Входящий" : call.type === "outgoing" ? "Исходящий" : "Пропущенный"}
+                      {call.duration ? ` · ${call.duration}` : ""}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end gap-1.5">
+                  <span className="text-tg-muted text-[11px]">{call.time}</span>
+                  <button className="p-1 rounded-lg text-tg-muted hover:text-tg-accent hover:bg-tg-hover transition-colors">
+                    <Icon name="Phone" size={14} />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         )}
 
