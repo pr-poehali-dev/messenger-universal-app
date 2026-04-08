@@ -334,6 +334,15 @@ export default function MiddlePanel({
               ))}
             </div>
 
+            <button
+              onClick={() => setActiveSection("security")}
+              className="w-full py-3 px-4 rounded-xl bg-tg-card text-tg-text text-[13px] font-medium hover:bg-tg-hover transition-colors flex items-center gap-3 mb-3"
+            >
+              <Icon name="ShieldCheck" size={15} className="text-tg-muted" />
+              Безопасность
+              <Icon name="ChevronRight" size={14} className="text-tg-muted ml-auto" />
+            </button>
+
             <button className="w-full py-3 px-4 rounded-xl bg-red-500/10 text-red-400 text-[13px] font-medium hover:bg-red-500/20 transition-colors flex items-center justify-center gap-2">
               <Icon name="LogOut" size={14} />
               Выйти из аккаунта

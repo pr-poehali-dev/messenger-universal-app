@@ -9,15 +9,6 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ activeSection, setActiveSection, sidebarOpen, setSidebarOpen }: SidebarProps) {
-  const navItems: { id: Section; icon: string; label: string }[] = [
-    { id: "chats", icon: "MessageCircle", label: "Чаты" },
-    { id: "contacts", icon: "Users", label: "Контакты" },
-    { id: "groups", icon: "UsersRound", label: "Группы" },
-    { id: "search", icon: "Search", label: "Поиск" },
-    { id: "security", icon: "ShieldCheck", label: "Безопасность" },
-    { id: "profile", icon: "User", label: "Профиль" },
-  ];
-
   return (
     <>
       {sidebarOpen && (
@@ -36,22 +27,7 @@ export default function Sidebar({ activeSection, setActiveSection, sidebarOpen, 
           <span className="text-tg-text font-semibold text-[15px] tracking-tight">SecureChat</span>
         </div>
 
-        <nav className="flex-1 py-3 overflow-y-auto">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => { setActiveSection(item.id); setSidebarOpen(false); }}
-              className={`w-full flex items-center gap-3 px-5 py-3 text-[14px] transition-all duration-150 ${
-                activeSection === item.id
-                  ? "bg-tg-accent/15 text-tg-accent font-medium"
-                  : "text-tg-muted hover:bg-tg-hover hover:text-tg-text"
-              }`}
-            >
-              <Icon name={item.icon as string} size={17} />
-              {item.label}
-            </button>
-          ))}
-        </nav>
+        <div className="flex-1" />
 
         <div
           className="px-5 py-4 border-t border-tg-border flex items-center gap-3 cursor-pointer hover:bg-tg-hover transition-colors"
